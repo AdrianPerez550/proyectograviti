@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block titulo %}  Agregar nuevo clientes  {% endblock %}
+
+{% block contenido  %} 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: lightgreen;
+        }
+
+        .contenedor-boton {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 40px);
+            margin: 20px;
+            overflow: hidden;
+        }
+        
+        .recuadro {
+            border: 2px solid #333;
+            border-radius: 10px;
+            background-color: #f5f5f5;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .titulo {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .boton-excel {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #f44336;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 32px;
+            padding: 20px 40px;
+            transition: all 0.5s;
+            cursor: pointer;
+        }
+        
+        .boton-excel span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+        
+        .boton-excel span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+        
+        .boton-excel:hover span {
+            padding-right: 25px;
+        }
+        
+        .boton-excel:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor-boton">
+        <div class="recuadro">
+            <h1 class="titulo">Darle clic a este botón</h1>
+            <a href="{% url 'exportar_excel' %}" class="boton-excel">
+                <span>Exportar a Excel</span>
+            </a>
+        </div>
+    </div>
+    <!-- Otros elementos en tu página -->
+</body>
+</html>
+
+{% endblock %}
+

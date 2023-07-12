@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #cce5ff; /* Color de fondo azul claro */
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            width: 400px;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            background-color: #f8f9fa; /* Color de fondo gris claro para el formulario */
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .card-header {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+
+        .form-group .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        .form-group .btn-primary {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff; /* Color de fondo azul para el botón */
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .form-group .btn-primary:hover {
+            background-color: #0069d9; /* Color de fondo azul oscuro al pasar el mouse */
+        }
+
+        .form-group .btn-primary:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+        }
+
+        .alert-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .alert-custom {
+            position: relative;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .alert-success-custom {
+            background-color: #28a745; /* Color de fondo verde para el mensaje de éxito */
+        }
+
+        .alert-error-custom {
+            background-color: #dc3545; /* Color de fondo rojo para el mensaje de error */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">Iniciar sesión</div>
+            <div class="alert-container">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert-custom {% if message.tags == 'success' %}alert-success-custom{% elif message.tags == 'error' %}alert-error-custom{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Usuario:</label>
+                    <input type="text" class="form-control" id="username" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="hideAlert()">Iniciar sesión</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function hideAlert() {
+            const alerts = document.querySelectorAll('.alert-container .alert-custom');
+            alerts.forEach(alert => {
+                alert.style.display = 'none';
+            });
+        }
+
+        // Ocultar mensajes de error después de 4 segundos
+        const errorAlerts = document.querySelectorAll('.alert-error-custom');
+        errorAlerts.forEach(alert => {
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
+

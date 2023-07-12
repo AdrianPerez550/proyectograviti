@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block titulo %}  Agregar nuevo clientes  {% endblock %}
+
+{% block contenido  %} 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bienvenidos al sitio de Gestión de Clientes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #c7ecee;
+        }
+
+        .jumbotron {
+            background-color: #007bff;
+            color: #fff;
+            padding: 100px;
+        }
+
+        .jumbotron h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .jumbotron p {
+            font-size: 18px;
+        }
+
+        .btn-start {
+            font-size: 24px;
+            padding: 10px 30px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1 style="font-size: 36px; font-weight: bold;">Bienvenidos al sitio de Gestión de Clientes</h1>
+            <p style="font-size: 18px;">Comience a ingresar los datos de los clientes</p>
+          
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}
