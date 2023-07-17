@@ -1,0 +1,33 @@
+<form enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+
+  {% for campo in formularioV %}
+  
+  <div class="mb-3">
+    <label for="" class="form-label">{{ campo.label }}</label>
+  
+  
+  <!-- The code you provided is an HTML input element. It is creating a text input field with the following
+  attributes: -->
+  
+    <input 
+    type="text"
+    class="form-control"
+    name="{{ campo.name }}"
+    id="" 
+    aria-describedby="helpId" 
+    placeholder="{{ campo.label }}"
+    value="{{ campo.value  }}"
+   
+    />
+    
+  
+      
+  </div>
+  <div class="col-12 hepl-text">{{campo.errors}}</div>
+  {% endfor %}
+  
+  <input name="" id="" class="btn btn-success" type="submit" value="Enviar Información">
+  <a name="" id="" class="btn btn-primary" href="{%url 'ventas'%}" role="button">Cancelar</a>
+  
+  </form>

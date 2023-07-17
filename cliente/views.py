@@ -4,7 +4,8 @@ from django.shortcuts import render,redirect
 
 from .models import Cliente
 from .forms import ClienteForm
-
+from .models import Ventas
+from .forms import VentasForm
 # LOGIN
 from django.shortcuts import render
 from django.contrib import messages
@@ -22,6 +23,8 @@ from openpyxl.utils import get_column_letter
 import datetime
 
 
+#GRAFICAR
+import matplotlib.pyplot as plt
 
 
 
@@ -31,7 +34,8 @@ def inicio(request):
  
  
  
- 
+ # CRUD CLIENTES -----------------
+
 def clientes(request):
     clientes = Cliente.objects.all()
     return render(request, 'clientes/index.html',{'clientes': clientes})
@@ -62,6 +66,53 @@ def eliminar(request, id):
     return redirect('clientes')
 
 
+ # CRUD CLIENTES -----------------
+ 
+ 
+ 
+ 
+ 
+ #CRUD VENTAS -------------------
+ 
+#def ventas(request):
+ #   return render(request,'ventas/crearV.html') 
+ 
+ 
+def ventas(request):
+    ventas = Ventas.objects.all()
+    
+    return render(request, 'ventas/indexV.html',{'ventas': ventas})
+
+ 
+def crear_ventas(request):
+    formularioV= VentasForm(request.POST or None)
+    if formularioV.is_valid():
+        formularioV.save()
+        return redirect('ventas')
+    return render(request,'ventas/crearV.html', {'formularioV': formularioV})
+ 
+def editar_ventas(request,id):
+    ventas= Ventas.objects.get(id=id)
+    formularioV= VentasForm(request.POST or None, instance=ventas)
+    if formularioV.is_valid() and request.POST:
+        formularioV.save();
+        return redirect('ventas')
+    return render(request,'ventas/editarV.html',{'formularioV': formularioV})
+
+
+
+
+
+
+
+
+def eliminar_ventas(request, id):
+    ventas =  Ventas.objects.get(id=id)
+    ventas.delete()
+    return redirect('ventas')
+
+
+ #CRUD VENTAS ----------------
  
  
  
@@ -125,7 +176,7 @@ def export_data_to_excel(request):
     field_fill = PatternFill(start_color='C1FFC1', end_color='C1FFC1', fill_type='solid')
 
     # Agrega los encabezados de las columnas
-    headers = ['id', 'nombre', 'apelidopate','apelidomater']  # Reemplaza con los nombres de tus campos
+    headers = ['id', 'Nombre', 'Apellido_paterno','Apellido_materno','edad','celular','genero' ]  # Reemplaza con los nombres de tus campos
 
     for col_num, header in enumerate(headers, 1):
         cell = worksheet.cell(row=1, column=col_num, value=header)
@@ -136,7 +187,7 @@ def export_data_to_excel(request):
 
     # Agrega los datos a las filas
     for row_num, item in enumerate(data, 2):
-        row = [item.id, item.nombre, item.apelidopate, item.apelidomater]  # Reemplaza con los nombres de tus campos
+        row = [item.id, item.nombre, item.apelidopate, item.apelidomater,item.edad,item.celular,item.genero]  # Reemplaza con los nombres de tus campos
 
         for col_num, value in enumerate(row, 1):
             cell = worksheet.cell(row=row_num, column=col_num, value=value)
@@ -175,8 +226,27 @@ def export_data_to_excel(request):
 
     return response
  
+ #GRAFICAR
+def graficas(request):
+     return render(request, 'paginas/graficas.html')
+ 
+def grafico(request):
+    # Datos para el gráfico
+    x = [1, 2, 3, 4, 5]
+    y = [10, 20, 15, 25, 30]
+    
+    # Generar gráfico
+    plt.plot(x, y)
+    plt.xlabel('Eje X')
+    plt.ylabel('Eje Y')
+    plt.title('Mi gráfico')
+    
+    # Guardar gráfico en un archivo
+    plt.savefig('/projectgravitii/imagenes/grafico.png')
+    
+    return HttpResponse("Gráfico generado")
  
  
- 
+    
  
 # Create your views here.

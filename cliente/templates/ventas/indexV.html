@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block titulo %}  Lista de Clientes {% endblock %}
+
+{% block contenido  %} 
+
+<div class="card">
+    <div class="card-header">
+        
+        <a name="" id="" class="btn btn-success" href="{% url 'crear_ventas' %}" role="button">Agregar nueva venta</a>
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">Ventas</h4>
+       
+        <div class="table-responsive">
+            <table class="table table-primary">
+                <thead>
+
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Tipo_comprador</th>
+                        <th scope="col">Metodo_pago</th>
+                        <th scope="col">Acciones</th>
+                    
+                    </tr>
+              
+                </thead>
+                <tbody>
+                    
+                    {% for Ventas in ventas %}
+                    <tr class="">
+                        <td scope="row">{{ Ventas.id }}</td>
+                        <td>{{ Ventas.dinero }}</td>
+                        <td>{{ Ventas.tipocomprador }}</td>
+                        <td>{{ Ventas.metodopago}}</td>
+                        <td><a name="" id="" class="btn btn-info" href="{% url 'editar_ventas' Ventas.id %}" role="button">Editar</a>  
+                        | <a name="" id="" class="btn btn-danger" href="{% url 'eliminar_ventas' Ventas.id %}" role="button">Borrar</a> </td>
+                        
+                    
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+
+    </div>
+    <div class="card-footer text-muted">
+       
+    </div>
+</div>
+
+{% endblock %}

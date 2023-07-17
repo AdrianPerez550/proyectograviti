@@ -1,0 +1,25 @@
+
+{% extends "base.html" %}
+
+{% block titulo %}  Nuevo {% endblock %}
+
+{% block contenido  %} 
+
+
+
+<div class="card">
+    <div class="card-header">
+        Editar informacion la venta
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">Datos de la venta </h4>
+
+       {% include 'ventas/formV.html' %}
+    
+    </div>
+    <div class="card-footer text-muted">
+        
+    </div>
+</div>
+
+{% endblock %}

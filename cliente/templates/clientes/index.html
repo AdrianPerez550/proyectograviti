@@ -22,6 +22,8 @@
                         <th scope="col">ApellidoPaterno</th>
                         <th scope="col">ApellidoMaterno</th>
                         <th scope="col">Edad</th>
+                        <th scope="col">Genero</th>
+                        <th scope="col">Celular</th>
                         <th scope="col">Acciones</th>
                     </tr>
               
@@ -35,6 +37,8 @@
                         <td>{{ Cliente.apelidopate }}</td>
                         <td>{{ Cliente.apelidomater }}</td>
                         <td>{{ Cliente.edad }}</td>
+                        <td>{{ Cliente.genero }}</td>
+                        <td>{{ Cliente.celular }}</td>
                         
                         <td><a name="" id="" class="btn btn-info" href="{% url 'editar' Cliente.id  %}" role="button">Editar</a> 
                             | <a name="" id="" class="btn btn-danger" href="{% url 'eliminar' Cliente.id %}" role="button">Borrar</a> </td>
